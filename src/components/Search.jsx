@@ -71,7 +71,7 @@ function Search() {
     if (submitted) {
       fetchData();
     }
-  }, [submitted, selectedTask, inputText]);
+  }, [submitted, selectedTask, inputText,isLoading]);
 
   return (
     <>
@@ -115,7 +115,9 @@ function Search() {
           Submit
         </button>
       </div>
-      {submitted && selectedTask === "weather" && <Weather weather={output} />}
+      {submitted && selectedTask === "weather" && (
+      <Weather weather={output} /> 
+      )}
       {submitted && selectedTask === "arxiv" && (
         <Arxiv publications={publication} />
       )}

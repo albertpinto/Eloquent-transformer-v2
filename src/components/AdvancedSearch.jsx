@@ -1,5 +1,6 @@
 import React, {useState,useEffect} from 'react'
 import LangChain from './LangChain';
+import Spinner from './shared/Spinner';
 
 function AdvancedSearch() {
     const tasks = ["Langchain-Text","Langchain-Prompt","Langchain-Tools"];
@@ -7,7 +8,7 @@ function AdvancedSearch() {
     const [inputText, setInputText] = useState("");
     const [submitted, setSubmitted] = useState(false);
     const [output, setOutput] = useState("");
-
+    const [isLoading, setIsLoading] = useState(true);
     const handleInputChange = (e) => {
       setInputText(e.target.value);
       setSubmitted(false);
@@ -99,7 +100,7 @@ function AdvancedSearch() {
               Submit
             </button>
           </div>
-          {submitted && (<LangChain langchain={output} />)}
+          {submitted && output ==="" ?<Spinner/>:(<LangChain langchain={output} />)}
         </>
       );
     }
