@@ -12,7 +12,8 @@ function Navbar({ title }) {
   
 
   return (
-    <nav className="navbar mb-12 shadow-lg bg-neutral text-neutral-content">
+    // <nav className="navbar mb-12 shadow-lg bg-neutral text-neutral-content">
+    <nav className="navbar mb-12 shadow-lg bg-gradient-to-r from-cyan-500 to blue-500 text-blue">
       <div className="container mx-auto flex justify-between items-center">
         <div className="flex-none px-2">
           <MdBuildCircle className="inline pr-2 text-3xl" />
@@ -52,6 +53,12 @@ function Navbar({ title }) {
                 className="btn btn-ghost btn-sm rounded-btn mr-4"
               >
                 Advanced
+              </Link>
+              <Link
+                to="/generation"
+                className="btn btn-ghost btn-sm rounded-btn mr-4"
+              >
+                Generation
               </Link>
               <Link
                 to="/about"

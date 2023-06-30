@@ -90,15 +90,24 @@ function AdvancedSearch() {
               value={inputText}
               onChange={handleInputChange}
             ></textarea>
-    
             <button
-              className="btn btn btn-accent"
+              className="btn btn bg-gradient-to-r from-cyan-500 to-blue-300"
               type="submit"
               style={{ width: "100px", marginTop: "20px" }}
               onClick={handleSubmit}
             >
               Submit
             </button>
+    
+{/*             <button
+              className="btn btn btn-accent"
+              type="submit"
+              style={{ width: "100px", marginTop: "20px" }}
+              onClick={handleSubmit}
+            >
+              Submit
+            </button> */}
+
           </div>
           {submitted && output ==="" ?<Spinner/>:(<LangChain langchain={output} />)}
         </>

@@ -15,13 +15,16 @@ function Search() {
   const [translate, setTranslate] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [wikipedia, setWikipedia] = useState([]);
+  const [word, setWord] = useState('');
+  const [mic, setMic] = useState(false);
   //const [scrape, setScrape] = useState([]);
-
+  let buttontext = mic ? "Mic Off" : "Mic On"
   const cleanData = () => {
     setPublication([]);
     setTranslate("");
     setOutput({});
     setWikipedia([]);
+    setWord("") 
   };
 
   const handleTaskChange = (e) => {
@@ -32,6 +35,8 @@ function Search() {
     setTranslate("");
     setOutput({});
     setWikipedia([]);
+    setWord("") 
+    setMic(false)
   };
 
   const fetchData = async () => {
@@ -58,16 +63,55 @@ function Search() {
     }
   };
 
+
+
   const handleInputChange = (e) => {
-    setInputText(e.target.value);
-    setSubmitted(false);
+      setInputText(e.target.value);
+      setSubmitted(false);
   };
+  
 
   const handleSubmit = () => {
     setSubmitted(true);
   };
 
+  const startSpeechRecognition = () => {
+    const SpeechRecognition = window.speechRecognition || window.webkitSpeechRecognition;
+    const recognition = new SpeechRecognition();
+    recognition.interimResults = false;
+    recognition.lang = 'en-US';
+    recognition.continuous = true;
+    if (!mic){
+      recognition.start()
+    }
+    else {
+      recognition.stop()
+    }
+
+    recognition.addEventListener('result', (e) => {
+      let word = e.results[0][0].transcript
+      word = word.charAt(0).toUpperCase() + word.slice(1);
+      //setMicImg(mic_off);
+      console.log(word);
+      setWord(word);
+      setInputText(word) 
+      
+    });
+  }
+
+  const handleMicClick = (e) => {
+    e.preventDefault();
+    setSubmitted(false);
+    setMic(!mic);
+    if (!mic) {
+      startSpeechRecognition();
+      setInputText(word) 
+    } 
+
+  };
+  
   useEffect(() => {
+    setMic(mic);
     if (submitted) {
       fetchData();
     }
@@ -105,15 +149,27 @@ function Search() {
           placeholder="Enter Input"
           value={inputText}
           onChange={handleInputChange}
-        ></textarea>
+        >
+        </textarea>
+        <span className="space-x-2 mt-4">
         <button
-          className="btn btn btn-accent"
+          className="btn btn  bg-gradient-to-r from-cyan-500 to-blue-300"
+          style={{ width: "100px", marginTop: "20px" }}
+          onClick={handleMicClick}
+          type="image"
+          
+        >
+          {buttontext}
+        </button>
+        <button
+          className="btn btn  bg-gradient-to-r from-cyan-500 to-blue-300"
           type="submit"
           style={{ width: "100px", marginTop: "20px" }}
           onClick={handleSubmit}
         >
           Submit
         </button>
+        </span>
       </div>
       {submitted && selectedTask === "weather" && (
       <Weather weather={output} /> 
