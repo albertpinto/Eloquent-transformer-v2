@@ -46,13 +46,13 @@ function Navbar({ title }) {
 
             <div className={`menu ${isMenuOpen ? "block" : "hidden"}`}>
               <Link to="/" className="btn btn-ghost btn-sm rounded-btn mr-4">
-                Basic Tasks
+                Utilities
               </Link>
               <Link
                 to="/advancedtasks"
                 className="btn btn-ghost btn-sm rounded-btn mr-4"
               >
-                Advanced
+                GPT
               </Link>
               <Link
                 to="/generation"

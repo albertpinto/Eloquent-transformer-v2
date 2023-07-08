@@ -3,7 +3,7 @@ import LangChain from './LangChain';
 import Spinner from './shared/Spinner';
 
 function AdvancedSearch() {
-    const tasks = ["Langchain-Text","Langchain-Prompt","Langchain-Tools"];
+    const tasks = ["Langchain-Prompt","Langchain-Text","Langchain-Tools"];
     const [selectedTask, setSelectedTask] = useState("");
     const [inputText, setInputText] = useState("");
     const [submitted, setSubmitted] = useState(false);
