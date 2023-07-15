@@ -61,6 +61,12 @@ function Navbar({ title }) {
                 Generation
               </Link>
               <Link
+                to="/search"
+                className="btn btn-ghost btn-sm rounded-btn mr-4"
+              >
+                Search
+              </Link>
+              <Link
                 to="/about"
                 className="btn btn-ghost btn-sm rounded-btn mr-4"
               >

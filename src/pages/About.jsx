@@ -6,7 +6,7 @@ function About() {
       PaceSetters Team: Albert, Dennis, Mushtaq, Farhan & Zaheer
       </p>
       <p className='text-lg text-gray-400'>
-        Version 1.2.0
+        Version 2.1.1
       </p>
      
     </>
