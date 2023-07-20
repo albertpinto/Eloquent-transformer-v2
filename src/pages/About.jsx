@@ -3,7 +3,7 @@ function About() {
     <>
       <h1 className='text-6xl mb-4'>Eloquent AI</h1>
       <p className='mb-4 text-2xl font-light'>
-      PaceSetters Team: Albert, Dennis, Mushtaq, Farhan & Zaheer
+      Albert Pinto
       </p>
       <p className='text-lg text-gray-400'>
         Version 2.1.1
