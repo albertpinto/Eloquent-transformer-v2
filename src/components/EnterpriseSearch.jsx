@@ -101,8 +101,9 @@ function EnterpriseSearch() {
               value={inputText}
               onChange={handleInputChange}
             ></textarea>
-            <button
-              className="btn btn bg-gradient-to-r from-cyan-500 to-blue-300"
+            <button 
+              className="btn btn bg-gradient-to-r from-cyan-500 to-blue-300
+              hover:from-cyan-600 hover:to-blue-400"
               type="submit"
               style={{ width: "100px", marginTop: "20px" }}
               onClick={handleSubmit}
