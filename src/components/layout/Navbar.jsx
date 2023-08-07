@@ -13,7 +13,7 @@ function Navbar({ title }) {
 
   return (
     // <nav className="navbar mb-12 shadow-lg bg-neutral text-neutral-content">
-    <nav className="navbar mb-12 shadow-lg bg-gradient-to-r from-cyan-500 to blue-500 text-blue">
+    <nav className="navbar mb-12 shadow-lg bg-gradient-to-r from-cyan-500 to blue-500 text-black-600">
       <div className="container mx-auto flex justify-between items-center">
         <div className="flex-none px-2">
           <MdBuildCircle className="inline pr-2 text-3xl" />

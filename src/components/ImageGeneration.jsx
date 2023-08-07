@@ -27,7 +27,7 @@ const ImageGeneration = () => {
   }
 
   return (
-    <div>
+    <div className="p-2 w-96 h-40 border-8 border-cyan-500 rounded-2xl shadow-2xl">
       <Image src={URL.createObjectURL(imageData)} />
       <input
         type="text"

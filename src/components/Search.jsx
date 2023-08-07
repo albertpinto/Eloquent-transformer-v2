@@ -151,18 +151,17 @@ function Search() {
           onChange={handleInputChange}
         >
         </textarea>
-        <span className="space-x-2 mt-4">
+        <span className="space-x-2">
         <button
-          className="btn btn  bg-gradient-to-r from-cyan-500 to-blue-300"
+          className="rounded-full btn btn  bg-cyan-500 shadow-lg shadow-cyan-500/50"
           style={{ width: "100px", marginTop: "20px" }}
           onClick={handleMicClick}
-          type="image"
-          
+          type="image"         
         >
           {buttontext}
         </button>
         <button
-          className="btn btn  bg-gradient-to-r from-cyan-500 to-blue-300"
+          className="rounded-full btn btn  bg-cyan-500 shadow-lg shadow-cyan-500/50"
           type="submit"
           style={{ width: "100px", marginTop: "20px" }}
           onClick={handleSubmit}

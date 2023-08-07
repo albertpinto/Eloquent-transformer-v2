@@ -11,12 +11,11 @@ function Weather({ weather }) {
   };
 
   return (
-    <div className="grid grid-cols-4 gap-4 pt-4">
-      <div className="col-span-4 font-bold text-xl">Weather Details:</div>
+    <div className="w-80 h-52 p-2 border-8 border-cyan-500 rounded-2xl shadow-2xl">
+      <div className="font-bold text-xl">Weather Details:</div>
       {Object.entries(weather).map(([key, value]) => (
         <React.Fragment key={key}>
-          <div className="col-span-2 font-semibold py-1">{key}:</div>
-          <div className="col-span-2 py-1">{addSuffix(key, value)}</div>
+          <div className="py-1">{key.charAt(0).toUpperCase() + key.slice(1)}: {addSuffix(key, value)}</div>
         </React.Fragment>
       ))}
     </div>

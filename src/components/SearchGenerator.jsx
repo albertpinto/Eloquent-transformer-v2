@@ -149,8 +149,7 @@ const SearchGenerator = () => {
               onChange={handleInputChange}
             ></textarea>
             <button
-              className="btn btn bg-gradient-to-r from-cyan-500 to-blue-300
-              hover:from-cyan-600 hover:to-blue-400"
+              className="rounded-full btn btn  bg-cyan-500 shadow-lg shadow-cyan-500/50"
               type="submit"
               style={{ width: "100px", marginTop: "20px" }}
               onClick={handleSubmit}
@@ -158,7 +157,7 @@ const SearchGenerator = () => {
               Submit
             </button>
           </div>
-          {submitted && selectedTask ==="Generate-Image" && image===""?<Spinner/>:submitted && selectedTask ==="Generate-Image" && (<div><img src={image} style={{ width: "320px",height: "320px"}}/></div>)}
+          {submitted && selectedTask ==="Generate-Image" && image===""?<Spinner/>:submitted && selectedTask ==="Generate-Image" && (<img src={image} style={{ width: "320px",height: "320px"}}/>)}
           {submitted && selectedTask ==="Generate-Text" && output===""?<Spinner/>:submitted && selectedTask ==="Generate-Text" && (<TextGenerator output={output}/>)}
           {/* {submitted && selectedTask ==="Generate-Video" 
           && videoData===null?<Spinner/>:submitted 

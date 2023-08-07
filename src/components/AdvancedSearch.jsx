@@ -91,8 +91,8 @@ function AdvancedSearch() {
               onChange={handleInputChange}
             ></textarea>
             <button
-              className="w-24 mt-6 btn btn bg-gradient-to-r from-cyan-500 to-blue-300
-              hover:from-cyan-600 hover:to-blue-400"
+              className="rounded-full btn btn  bg-cyan-500 shadow-lg shadow-cyan-500/50"
+              style={{ width: "100px", marginTop: "20px" }}
               type="submit"
               onClick={handleSubmit}
             >
