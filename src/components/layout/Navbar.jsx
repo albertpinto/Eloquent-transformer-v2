@@ -67,6 +67,12 @@ function Navbar({ title }) {
                 Search
               </Link>
               <Link
+                to="/chat"
+                className="btn btn-ghost btn-sm rounded-btn mr-4"
+              >
+                AI Chat
+              </Link>
+              <Link
                 to="/about"
                 className="btn btn-ghost btn-sm rounded-btn mr-4"
               >
