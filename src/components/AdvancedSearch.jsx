@@ -36,6 +36,7 @@ function AdvancedSearch() {
       switch (selectedTask) {
         case "Langchain-Text":
           sTask ="lc_text"
+          //sTask ="langchain_text"
           break;
         case "Langchain-Prompt":
           sTask ="lc_prompt"

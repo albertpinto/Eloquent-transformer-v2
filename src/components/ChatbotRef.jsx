@@ -3,40 +3,66 @@ import { OpenAI } from "langchain/llms/openai";
 import { BufferMemory } from "langchain/memory";
 import { ConversationChain } from "langchain/chains";
 import { SerpAPI } from "langchain/tools";
+
 const ChatBotRef = () => {
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState("");
-  const chainRef = useRef(null); // Step 1: Create a ref
-  const initializeChat = async () => {
-    const tools = [
-      new SerpAPI(process.env.REACT_APP_SERPAPI_API_KEY, {
-        location: "Austin,Texas,United States",
-        hl: "en",
-        gl: "us",
+  const [randomName, setRandomName] = useState(null);
+  const [chatSummary, setChatSummary] = useState("");
+  const [showSummary, setShowSummary] = useState(false);
+
+  const chain = useRef(
+    new ConversationChain({
+      llm: new OpenAI({
+        openAIApiKey: process.env.REACT_APP_OPENAI_API_KEY,
+        temperature: 0,
+        llm: "gpt-4",
       }),
-    ];
-    const llm = new OpenAI({
-      openAIApiKey: process.env.REACT_APP_OPENAI_API_KEY,
-      temperature: 0,
-      llm: "gpt-4",
-      tools: tools,
-    });
+      memory: new BufferMemory(),
+      tools: [
+        new SerpAPI(process.env.REACT_APP_SERPAPI_API_KEY, {
+          location: "Austin,Texas,United States",
+          hl: "en",
+          gl: "us",
+        }),
+      ],
+    })
+  ).current;
 
-    const memory = new BufferMemory();
-    chainRef.current = new ConversationChain({ llm: llm, memory: memory }); // Step 2: Assign to the ref
-
-    const response = await chainRef.current.call({ input: "Hi! I'm Albert." });
-    const initialResponse = response.response;
-    setMessages([{ text: initialResponse, type: "bot" }]);
-  };
+  const nameList = [
+    "Alice",
+    "Bob",
+    "Charlie",
+    "David",
+    "Emma",
+    "Frank",
+    "Heather",
+    "Ivan",
+    "John",
+  ];
 
   useEffect(() => {
-    initializeChat();
+    const randomIndex = Math.floor(Math.random() * nameList.length);
+    setRandomName(nameList[randomIndex]);
   }, []);
+
+  useEffect(() => {
+    if (randomName) {
+      const initializeChat = async () => {
+        const response = await chain.call({
+          input: `Hi! I'm Albert. Your name is: ${randomName}`,
+        });
+        const initialResponse = response.response;
+        setMessages([{ text: initialResponse, type: "bot" }]);
+      };
+      initializeChat();
+    }
+  }, [randomName]);
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
   };
+
   const handleKeyDown = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
@@ -46,8 +72,7 @@ const ChatBotRef = () => {
 
   const handleSend = async () => {
     if (inputValue.trim() !== "") {
-        // Step 3: Update to use chainRef.current
-      const botResponse = await chainRef.current.call({ input: inputValue });
+      const botResponse = await chain.call({ input: inputValue });
 
       setTimeout(() => {
         setMessages((prevMessages) => [
@@ -63,12 +88,24 @@ const ChatBotRef = () => {
   const handleClear = () => {
     setMessages([]);
     setInputValue("");
-    chainRef.current.memory.clear();
-    initializeChat();
+    chain.memory.clear();
+    setRandomName(nameList[Math.floor(Math.random() * nameList.length)]);
+    setChatSummary("");
+    setShowSummary(false);
   };
 
+  const handleSummarize = async () => {
+    const response = await chain.call({ input: "Summarize the chat" });
+    const summary = response.response;
+    setChatSummary(summary);
+    if (showSummary) setShowSummary(false); // Hide the summary text area
+    else setShowSummary(true); // Show the summary text area
+  };
   return (
-    <div className="w-auto h-auto border border-gray-300 flex flex-col justify-between">
+    <div className="w-auto h-auto border border-gray-600 flex flex-col justify-between">
+      <div className="flex p-4 border-t border-gray-600">
+        <h3 className="text-xl font-bold">AI Chat</h3>
+      </div>
       <div className="p-4 overflow-y-auto">
         {messages.map((message, index) => (
           <div
@@ -83,13 +120,13 @@ const ChatBotRef = () => {
           </div>
         ))}
       </div>
-      <div className="flex p-4 border-t border-gray-300">
+      <div className="flex p-4 border-t border-gray-600">
         <input
           value={inputValue}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
           placeholder="Type your message..."
-          className="flex-1 p-2 border border-gray-400 rounded mr-2"
+          className="flex-1 p-2 border border-gray-600 rounded mr-2"
         />
         <button
           onClick={handleClear}
@@ -103,7 +140,27 @@ const ChatBotRef = () => {
         >
           Send
         </button>
+        <button
+          onClick={handleSummarize}
+          className="px-4 py-1 bg-cyan-500 shadow-lg shadow-cyan-500/50 rounded-full"
+        >
+          {showSummary ? "Hide Summary" : "Summary"}
+        </button>
       </div>
+      {showSummary && (
+        <div className="p-4 border-t border-gray-600">
+          <h3 className="text-xl font-bold">Summary</h3>
+          <div className="pt-4 flex justify-between">
+            <textarea
+              value={chatSummary}
+              readOnly
+              placeholder=""
+              className="w-full bg-cyan-500 shadow-cyan-500/50 rounded text-black-800 p-2"
+              rows="4"
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
