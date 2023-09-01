@@ -12,6 +12,8 @@ import SearchGenerator from "./components/SearchGenerator";
 import TextVideo from "./components/TextVideo";
 import EnterpriseSearch from "./components/EnterpriseSearch";
 import ChatBot from "./components/ChatBot";
+import Chat2 from "./components/ChatBot";
+import ChatBotRef from "./components/ChatbotRef";
 
 
 function App() {
@@ -41,7 +43,7 @@ function App() {
             <Route path="/generation" element={<SearchGenerator />} />
             <Route path="/textvideo" element={<TextVideo />} />
             <Route path="/search" element={<EnterpriseSearch />} />
-            <Route path="/chat" element={<ChatBot />} />
+            <Route path="/chat" element={<ChatBotRef />} />
             <Route path="/notfound" element={<NotFound />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
